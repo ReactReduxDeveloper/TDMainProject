@@ -18,7 +18,8 @@ function App() {
    const ChangeStatus = (taskID:string, isDone:boolean)=> {
        let task = tasks.find(t=>t.id ===taskID)
        if (task) {task.isDone = isDone}
-       setTasks(tasks);
+       let copy = [...tasks]
+       setTasks(copy);
 
    }
 
@@ -38,10 +39,10 @@ function App() {
     let tasksForTodolist = tasks;
 
     if (filter === "active") {
-        tasksForTodolist = tasks.filter(t => t.isDone === false);
+        tasksForTodolist = tasks.filter(t => !t.isDone);
     }
     if (filter === "completed") {
-        tasksForTodolist = tasks.filter(t => t.isDone === true);
+        tasksForTodolist = tasks.filter(t => t.isDone);
     }
 
     function changeFilter(value: FilterValuesType) {
@@ -58,6 +59,7 @@ function App() {
                       changeFilter={changeFilter}
                       addTask={addTask}
                       ChangeStatus={ChangeStatus}
+                      filter={filter}
             />
         </div>
     );
