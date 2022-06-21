@@ -15,6 +15,13 @@ function App() {
         { id: v1(), title: "GraphQL", isDone: false },
     ]);
 
+   const ChangeStatus = (taskID:string, isDone:boolean)=> {
+       let task = tasks.find(t=>t.id ===taskID)
+       if (task) {task.isDone = isDone}
+       setTasks(tasks);
+
+   }
+
     function removeTask(id: string) {
         let filteredTasks = tasks.filter(t => t.id != id);
         setTasks(filteredTasks);
@@ -49,7 +56,9 @@ function App() {
                       tasks={tasksForTodolist}
                       removeTask={removeTask}
                       changeFilter={changeFilter}
-                      addTask={addTask} />
+                      addTask={addTask}
+                      ChangeStatus={ChangeStatus}
+            />
         </div>
     );
 }
